@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fotografia | João Felix</title>
+<meta name="description" content="Portfólio de Fotografia: Cobertura de eventos, shows, ensaios autorais e tratamento de imagem.">
+<meta name="theme-color" content="#171512">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+  .grid-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .album-card {
+    background: #1c1a17;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+  }
+  .album-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .album-cover {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .album-card:hover .album-cover img {
+    transform: scale(1.05);
+  }
+  .pill-tag {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    color: #fefdd7;
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .album-info { padding: 24px; }
+  .album-info h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+  .album-info .desc { font-size: 14px; opacity: 0.7; line-height: 1.4; }
+  .album-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .stat-box .label { font-size: 11px; text-transform: uppercase; opacity: 0.5; display: block; }
+  .stat-box h4 { font-size: 20px; font-weight: 800; }
+  
+  dialog#modal-lightbox {
+    background: transparent;
+    border: none;
+    max-width: 90vw;
+    max-height: 90vh;
+    margin: auto;
+    outline: none;
+  }
+  dialog#modal-lightbox::backdrop {
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(10px);
+  }
+  .lightbox-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 12px;
+    object-fit: contain;
+  }
+  .lightbox-content p {
+    margin-top: 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body id="topo">
+
+<div class="top">
+  <header class="bar">
+    <a class="logo" href="#topo">JFELIX®</a>
+    <nav aria-label="Principal">
+      <a href="#galeria">Galeria</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato ↗</a>
+    </nav>
+    <a class="btn-hub" href="https://jfeelix-hub.vercel.app/">VOLTAR AO HUB ↗</a>
+  </header>
+</div>
+
+<main>
+  <section class="hero" aria-labelledby="h-hero">
+    <p class="meta">JFELIX® / Fotografia & Retratos · 2026</p>
+    <h1 id="h-hero"><span>Fotos</span><span class="dot">.</span> <span class="amp">&amp;</span> <span>olhar</span><span class="dot">.</span></h1>
+  </section>
+
+  <section id="galeria" class="projetos">
+    <h2 class="sr">Álbuns e coberturas</h2>
+    <div id="galeria-albuns" class="grid-fotos"></div>
+  </section>
+</main>
+
+<footer>
+  <span>João Victor Felix Ramalho · Sorocaba — SP</span>
+  <span>JFELIX® · 2026</span>
+  <a href="#topo">Voltar ao topo ↑</a>
+</footer>
+
+<dialog id="modal-lightbox">
+  <div class="lightbox-content">
+    <button class="m-x" type="button" aria-label="Fechar" style="position: absolute; top: -40px; right: 0; color: #fff; background: none; border: none; font-size: 28px; cursor: pointer;">×</button>
+    <img id="img-modal" src="" alt="">
+    <p id="caption-modal"></p>
+  </div>
+</dialog>
+
+<script src="photos.js"></script>
+<script src="main-photos.js"></script>
+
+<!-- Script da Animação de Números -->
+<script>
+(function () {
+  "use strict";
+  function animateValue(obj, start, end, duration, decimals, prefix, suffix) {
+    if (obj.dataset.animated === "true") return;
+    obj.dataset.animated = "true";
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+      const currentValue = start + easeOutProgress * (end - start);
+      const formattedValue = decimals > 0 ? currentValue.toFixed(decimals) : Math.floor(currentValue);
+      obj.innerHTML = prefix + formattedValue + suffix;
+      if (progress < 1) window.requestAnimationFrame(step);
+    };
+    window.requestAnimationFrame(step);
+  }
+
+  const numObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseFloat(el.getAttribute("data-target"));
+        if (!isNaN(target)) {
+          const prefix = el.getAttribute("data-prefix") || "";
+          const suffix = el.getAttribute("data-suffix") || "";
+          const decimals = parseInt(el.getAttribute("data-decimals"), 10) || 0;
+          animateValue(el, 0, target, 1500, decimals, prefix, suffix);
+        }
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  const mutationObserver = new MutationObserver(() => {
+    document.querySelectorAll(".stat-number").forEach(el => {
+      if (el.dataset.animated !== "true") numObserver.observe(el);
+    });
+  });
+
+  mutationObserver.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
+</body>
+</html>
