@@ -1,48 +1,19 @@
-with open("index (15).html", "r", encoding="utf-8") as f:
-    html = f.read()
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fotografia | João Felix</title>
+<meta name="description" content="Portfólio de Fotografia: Cobertura de eventos, pessoas, retratos e fotografia de produtos.">
+<meta name="theme-color" content="#171512">
 
-# Fotos exactas vistas nos prints do repositório:
-# Pasta base: "Fotos compactas/"
-# Pessoas (16 fotos visíveis na captura):
-pessoas_files = [
-    "65-_DSC0142.webp",
-    "69-_DSC0156.webp",
-    "_DSC0036 2.webp",
-    "_DSC0069.webp",
-    "_DSC0082.webp",
-    "_DSC0138.webp",
-    "_DSC0182 2.webp",
-    "_DSC0213.webp",
-    "_DSC0233.webp",
-    "_DSC0242.webp",
-    "_DSC0291.webp",
-    "_DSC0295.webp",
-    "_DSC0405.webp",
-    "_DSC0455.webp",
-    "_DSC0493.webp",
-    "_DSC0523.webp"
-]
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
 
-# Produtos (10 fotos visíveis na captura):
-produtos_files = [
-    "_DSC0114 3.webp",
-    "_DSC0129 2.webp",
-    "namata set24-32.webp",
-    "namata set24-37.webp",
-    "namata set24-45.webp",
-    "namata set24-46.webp",
-    "namata set24-58.webp",
-    "namata set24-61.webp",
-    "namata set24-72.webp",
-    "namata set24-86.webp"
-]
-
-# Como o HTML atual usa `styles.css`, `photos.js` e `main-photos.js`, mas queremos garantir que TODAS as fotos apareçam
-# organizadas em "Pessoas" e "Produtos" mantendo o visual escuro original (#171512 / #1c1a17), o lightbox funcional,
-# e também sem quebrar nada caso styles.css esteja no repositório.
-
-new_styles = """<style>
-  /* Fallback caso styles.css não carregue ou precise complementar */
+<style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background-color: #171512;
@@ -130,7 +101,6 @@ new_styles = """<style>
     font-weight: 400;
   }
 
-  /* Filtros e Cabeçalhos de Categoria */
   .filter-bar {
     display: flex;
     flex-wrap: wrap;
@@ -324,48 +294,7 @@ new_styles = """<style>
     main { padding: 0 18px 72px; }
     .grid-fotos { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
   }
-</style>"""
-
-# Gerar cards HTML para Pessoas
-pessoas_cards = []
-for i, fname in enumerate(pessoas_files, 1):
-    src = f"Fotos compactas/Pessoas/{fname}"
-    label = f"Pessoas & Eventos · #{i:02d}"
-    pessoas_cards.append(f"""      <article class="album-card" data-categoria="pessoas" data-src="{src}" data-caption="{label}">
-        <div class="album-cover">
-          <img src="{src}" alt="{label}" loading="lazy">
-          <span class="pill-tag">Pessoas</span>
-        </div>
-      </article>""")
-
-# Gerar cards HTML para Produtos
-produtos_cards = []
-for i, fname in enumerate(produtos_files, 1):
-    src = f"Fotos compactas/Produtos/{fname}"
-    label = f"Produtos · #{i:02d}"
-    produtos_cards.append(f"""      <article class="album-card" data-categoria="produtos" data-src="{src}" data-caption="{label}">
-        <div class="album-cover">
-          <img src="{src}" alt="{label}" loading="lazy">
-          <span class="pill-tag">Produtos</span>
-        </div>
-      </article>""")
-
-full_html = f"""<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fotografia | João Felix</title>
-<meta name="description" content="Portfólio de Fotografia: Cobertura de eventos, pessoas, retratos e fotografia de produtos.">
-<meta name="theme-color" content="#171512">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="styles.css">
-
-{new_styles}
+</style>
 </head>
 <body id="topo">
 
@@ -388,9 +317,9 @@ full_html = f"""<!doctype html>
 
     <div class="filter-bar">
       <div class="filter-tabs" role="tablist" aria-label="Filtrar categoria">
-        <button class="filter-btn active" type="button" data-filter="todos">Todas ({len(pessoas_files) + len(produtos_files)})</button>
-        <button class="filter-btn" type="button" data-filter="pessoas">Eventos &amp; Pessoas ({len(pessoas_files)})</button>
-        <button class="filter-btn" type="button" data-filter="produtos">Produtos ({len(produtos_files)})</button>
+        <button class="filter-btn active" type="button" data-filter="todos">Todas (26)</button>
+        <button class="filter-btn" type="button" data-filter="pessoas">Eventos &amp; Pessoas (16)</button>
+        <button class="filter-btn" type="button" data-filter="produtos">Produtos (10)</button>
       </div>
     </div>
   </section>
@@ -400,10 +329,105 @@ full_html = f"""<!doctype html>
     <div id="sec-pessoas" class="categoria-bloco" data-bloco="pessoas">
       <div class="categoria-header">
         <h2>Eventos &amp; Pessoas</h2>
-        <span>{len(pessoas_files)} fotografias</span>
+        <span>16 fotografias</span>
       </div>
       <div class="grid-fotos">
-{chr(10).join(pessoas_cards)}
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/65-_DSC0142.webp" data-caption="Pessoas &amp; Eventos · #01">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/65-_DSC0142.webp" alt="Pessoas &amp; Eventos · #01" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/69-_DSC0156.webp" data-caption="Pessoas &amp; Eventos · #02">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/69-_DSC0156.webp" alt="Pessoas &amp; Eventos · #02" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0036%202.webp" data-caption="Pessoas &amp; Eventos · #03">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0036%202.webp" alt="Pessoas &amp; Eventos · #03" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0069.webp" data-caption="Pessoas &amp; Eventos · #04">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0069.webp" alt="Pessoas &amp; Eventos · #04" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0082.webp" data-caption="Pessoas &amp; Eventos · #05">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0082.webp" alt="Pessoas &amp; Eventos · #05" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0138.webp" data-caption="Pessoas &amp; Eventos · #06">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0138.webp" alt="Pessoas &amp; Eventos · #06" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0182%202.webp" data-caption="Pessoas &amp; Eventos · #07">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0182%202.webp" alt="Pessoas &amp; Eventos · #07" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0213.webp" data-caption="Pessoas &amp; Eventos · #08">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0213.webp" alt="Pessoas &amp; Eventos · #08" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0233.webp" data-caption="Pessoas &amp; Eventos · #09">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0233.webp" alt="Pessoas &amp; Eventos · #09" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0242.webp" data-caption="Pessoas &amp; Eventos · #10">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0242.webp" alt="Pessoas &amp; Eventos · #10" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0291.webp" data-caption="Pessoas &amp; Eventos · #11">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0291.webp" alt="Pessoas &amp; Eventos · #11" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0295.webp" data-caption="Pessoas &amp; Eventos · #12">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0295.webp" alt="Pessoas &amp; Eventos · #12" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0405.webp" data-caption="Pessoas &amp; Eventos · #13">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0405.webp" alt="Pessoas &amp; Eventos · #13" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0455.webp" data-caption="Pessoas &amp; Eventos · #14">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0455.webp" alt="Pessoas &amp; Eventos · #14" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0493.webp" data-caption="Pessoas &amp; Eventos · #15">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0493.webp" alt="Pessoas &amp; Eventos · #15" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="pessoas" data-src="Fotos%20compactas/Pessoas/_DSC0523.webp" data-caption="Pessoas &amp; Eventos · #16">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Pessoas/_DSC0523.webp" alt="Pessoas &amp; Eventos · #16" loading="lazy">
+            <span class="pill-tag">Pessoas</span>
+          </div>
+        </article>
       </div>
     </div>
 
@@ -411,10 +435,69 @@ full_html = f"""<!doctype html>
     <div id="sec-produtos" class="categoria-bloco" data-bloco="produtos">
       <div class="categoria-header">
         <h2>Produtos</h2>
-        <span>{len(produtos_files)} fotografias</span>
+        <span>10 fotografias</span>
       </div>
       <div class="grid-fotos">
-{chr(10).join(produtos_cards)}
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/_DSC0114%203.webp" data-caption="Produtos · #01">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/_DSC0114%203.webp" alt="Produtos · #01" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/_DSC0129%202.webp" data-caption="Produtos · #02">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/_DSC0129%202.webp" alt="Produtos · #02" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/namata%20set24-32.webp" data-caption="Produtos · #03">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/namata%20set24-32.webp" alt="Produtos · #03" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/namata%20set24-37.webp" data-caption="Produtos · #04">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/namata%20set24-37.webp" alt="Produtos · #04" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/namata%20set24-45.webp" data-caption="Produtos · #05">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/namata%20set24-45.webp" alt="Produtos · #05" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/namata%20set24-46.webp" data-caption="Produtos · #06">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/namata%20set24-46.webp" alt="Produtos · #06" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/namata%20set24-58.webp" data-caption="Produtos · #07">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/namata%20set24-58.webp" alt="Produtos · #07" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/namata%20set24-61.webp" data-caption="Produtos · #08">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/namata%20set24-61.webp" alt="Produtos · #08" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/namata%20set24-72.webp" data-caption="Produtos · #09">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/namata%20set24-72.webp" alt="Produtos · #09" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
+        <article class="album-card" data-categoria="produtos" data-src="Fotos%20compactas/Produtos/namata%20set24-86.webp" data-caption="Produtos · #10">
+          <div class="album-cover">
+            <img src="Fotos%20compactas/Produtos/namata%20set24-86.webp" alt="Produtos · #10" loading="lazy">
+            <span class="pill-tag">Produtos</span>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -439,30 +522,28 @@ full_html = f"""<!doctype html>
 </dialog>
 
 <script>
-(function () {{
+(function () {
   "use strict";
 
-  // 1. Filtro de categorias (Todas / Eventos & Pessoas / Produtos)
   const filterBtns = document.querySelectorAll(".filter-btn");
   const blocos = document.querySelectorAll(".categoria-bloco");
 
-  filterBtns.forEach(btn => {{
-    btn.addEventListener("click", () => {{
+  filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
       const filtro = btn.dataset.filter;
       filterBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
 
-      blocos.forEach(bloco => {{
-        if (filtro === "todos" || bloco.dataset.bloco === filtro) {{
+      blocos.forEach(bloco => {
+        if (filtro === "todos" || bloco.dataset.bloco === filtro) {
           bloco.classList.remove("hidden");
-        }} else {{
+        } else {
           bloco.classList.add("hidden");
-        }}
-      }});
-    }});
-  }});
+        }
+      });
+    });
+  });
 
-  // 2. Lightbox com navegação entre fotos
   const modal = document.getElementById("modal-lightbox");
   const imgModal = document.getElementById("img-modal");
   const captionModal = document.getElementById("caption-modal");
@@ -473,61 +554,55 @@ full_html = f"""<!doctype html>
   const allCards = Array.from(document.querySelectorAll(".album-card"));
   let currentIndex = 0;
 
-  function getVisibleCards() {{
+  function getVisibleCards() {
     return allCards.filter(card => !card.closest(".categoria-bloco").classList.contains("hidden"));
-  }}
+  }
 
-  function openModalByCard(card) {{
+  function openModalByCard(card) {
     const visible = getVisibleCards();
     currentIndex = visible.indexOf(card);
     if (currentIndex === -1) currentIndex = 0;
     renderModal(visible);
     if (!modal.open) modal.showModal();
-  }}
+  }
 
-  function renderModal(visibleList) {{
+  function renderModal(visibleList) {
     const card = visibleList[currentIndex];
     if (!card) return;
     imgModal.src = card.dataset.src;
     imgModal.alt = card.dataset.caption || "";
     captionModal.textContent = card.dataset.caption || "";
-  }}
+  }
 
-  allCards.forEach(card => {{
+  allCards.forEach(card => {
     card.addEventListener("click", () => openModalByCard(card));
-  }});
+  });
 
-  prevBtn.addEventListener("click", () => {{
+  prevBtn.addEventListener("click", () => {
     const visible = getVisibleCards();
     currentIndex = (currentIndex - 1 + visible.length) % visible.length;
     renderModal(visible);
-  }});
+  });
 
-  nextBtn.addEventListener("click", () => {{
+  nextBtn.addEventListener("click", () => {
     const visible = getVisibleCards();
     currentIndex = (currentIndex + 1) % visible.length;
     renderModal(visible);
-  }});
+  });
 
   fecharBtn.addEventListener("click", () => modal.close());
 
-  modal.addEventListener("click", (e) => {{
+  modal.addEventListener("click", (e) => {
     if (e.target === modal) modal.close();
-  }});
+  });
 
-  document.addEventListener("keydown", (e) => {{
+  document.addEventListener("keydown", (e) => {
     if (!modal.open) return;
     if (e.key === "ArrowLeft") prevBtn.click();
     if (e.key === "ArrowRight") nextBtn.click();
-  }});
-}})();
+  });
+})();
 </script>
 
 </body>
 </html>
-"""
-
-with open("index-fotos-atualizado.html", "w", encoding="utf-8") as f:
-    f.write(full_html)
-
-print(f"Gerado com sucesso: {len(pessoas_files)} fotos de Pessoas e {len(produtos_files)} fotos de Produtos.")
