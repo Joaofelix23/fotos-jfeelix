@@ -526,3 +526,8 @@ full_html = f"""<!doctype html>
 </body>
 </html>
 """
+
+with open("index-fotos-atualizado.html", "w", encoding="utf-8") as f:
+    f.write(full_html)
+
+print(f"Gerado com sucesso: {len(pessoas_files)} fotos de Pessoas e {len(produtos_files)} fotos de Produtos.")
